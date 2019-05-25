@@ -31,7 +31,7 @@ for i , conf_num in enumerate(lconf):
     else :
         result.write("    %5.4d    " % enumerator[i]),
         result.write('\t')
-        result.write("   %5.5d   " % conf_num),
+        result.write("   %d   " % conf_num),
         result.write('\n')
 
 print('number of total lines is :{}'.format(j-1))
