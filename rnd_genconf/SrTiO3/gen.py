@@ -1,7 +1,8 @@
 #!/usr/bin/env python
 import random
 import math
-kat = 5
+str_num = 5
+kat = 6
 nat = 5*kat
 dmin = 3
 #cv1=8
@@ -19,7 +20,7 @@ cv3 = cvs
 #    print('Cell is not large enough\n')
 #    print('suggested cv is : %4.4f\n'% (cvs))
 #    exit()
-for i in range(75):
+for i in range(str_num):
     str_name = 'posout_'+"%3.3d" % (nat)+'_'+"%3.3d" % (i)+'.ascii'
     output = open(str_name,'w')
     xat=[]
