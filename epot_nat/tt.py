@@ -23,4 +23,4 @@ stream_out=open(args.fn_out, "w")
 for i in range(len(dict_list)):
     epot = float(dict_list[i]['conf']['epot'])*27.211386245988
     nat = float(dict_list[i]['conf']['nat'])
-    stream_out.write("%5.5d \t %14.6f \t %5.5d \t %14.6f \n" %(i,epot,nat,epot/nat))
+    stream_out.write("%5.5d \t %14.6f \t %5.5d \t %14.6f \n" %(i+1,epot,nat,epot/nat))
