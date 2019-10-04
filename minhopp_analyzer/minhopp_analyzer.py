@@ -17,9 +17,19 @@ for l in dir_list:
     monmh = open(filename,'r')
     good_pot = True
     first_line = monmh.readline()
+    B = 0.0E+00
+    N = 0.0E+00
+    max_val = -1.E+00
     for line in monmh:
         A = line.split()
-        if int(float(A[-1])) > args.mh_s:
+        mh_step =  int(float(A[-1]))
+        B = B + mh_step
+        N = N + 1.0E+00
+        if mh_step > max_val:
+            max_val = mh_step
+            max_loc = N
+        if mh_step > args.mh_s:
             good_pot = False
     if good_pot:
-        stream_out.write('\t'+'-'+'\t'+l+'\n')
+        average = B/N
+        stream_out.write('\t'+'-'+'\t'+l+'\t'+str(average)+'\t'+str(max_val)+'\t'+str(max_loc)+'\n')
