@@ -21,6 +21,6 @@ dict_list = list(yaml.load_all(stream_in, Loader=Loader))
 stream_out=open(args.fn_out, "w")
 
 for i in range(len(dict_list)):
-    epot = float(dict_list[i]['conf']['epot'])*27.211386245988
+    epot = float(dict_list[i]['conf']['epot'])*27.211385e+00
     nat = float(dict_list[i]['conf']['nat'])
     stream_out.write("%5.5d \t %14.6f \t %5.5d \t %14.6f \n" %(i+1,epot,nat,epot/nat))
