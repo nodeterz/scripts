@@ -15,7 +15,7 @@ dict_list = list(yaml.load_all(stream, Loader=Loader))
 
 for count,conf in enumerate(dict_list):
     file_num = count/args.str_num
-    print(file_num)
+    #print(file_num)
     fn_out = "tt%5.5d.yaml"%file_num
     output_stream=open(fn_out,"a+")
     output_stream.write('---\n')
