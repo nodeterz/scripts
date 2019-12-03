@@ -12,6 +12,7 @@ args=parser.parse_args()
 stream_in = open(args.dirs,'r')
 dir_list= yaml.load(stream_in)
 stream_out = open(args.fn_out,'w')
+stream_out.write(" \t # %20s \t %8s \t %5s \t %5s \t %5s \n" % ("DIR","AVERAGE","MAX","ITER","MHS"))
 for l in dir_list:
     filename = l+'/monminhopp/monitoring.000'    
     monmh = open(filename,'r')
@@ -20,7 +21,9 @@ for l in dir_list:
     B = 0.0E+00
     N = 0.0E+00
     max_val = -1.E+00
+    min_num=-1
     for line in monmh:
+        min_num = min_num+1
         A = line.split()
         mh_step =  int(float(A[-1]))
         B = B + mh_step
@@ -32,4 +35,5 @@ for l in dir_list:
             good_pot = False
     if good_pot:
         average = B/N
-        stream_out.write('\t'+'-'+'\t'+l+'\t'+str(average)+'\t'+str(max_val)+'\t'+str(max_loc)+'\n')
+#        stream_out.write('\t'+'-'+'\t'+l+'\t'+str(average)+'\t'+str(max_val)+'\t'+str(max_loc)+'\n')
+        stream_out.write(" \t - %20s \t %5.3f \t %5d \t %5d \t %5d \n" % (l,average,max_val,max_loc,min_num))

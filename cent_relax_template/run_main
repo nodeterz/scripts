@@ -1,0 +1,37 @@
+#!/bin/sh
+#SBATCH --job-name="geopt"
+#SBATCH -n 1
+#SBATCH --output=bachoutput
+#SBATCH --nodes=1-1
+#SBATCH -p all
+#SBATCH --time=2-00:00:00
+
+scratcher () {
+OLDDIR=$PWD
+DIRNAME="${PWD##*/}"
+cd ..
+PARNAME="${PWD##*/}"
+cd $OLDDIR
+RUNDIR="/scratch/${USER}/minhocao/$PARNAME/$DIRNAME"
+rm -rf $RUNDIR
+mkdir -p $RUNDIR
+cp -r * $RUNDIR
+cd $RUNDIR
+
+~tahmasbi/bin/flame >o1
+cd $OLDDIR
+
+cp -r $RUNDIR/* .
+rm -rf $RUNDIR
+}
+
+cd GEOPT_S001 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S002 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S003 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S004 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S005 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S006 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S007 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S008 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S009 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
+cd GEOPT_S010 && scratcher && ascii2yaml.py poslow00001.ascii posout.yaml && cd ..
