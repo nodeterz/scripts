@@ -25,7 +25,7 @@ dict_list = list(yaml.load_all(stream, Loader=Loader))
 v1 = [0, 0 ,0]
 v2 = [0, 0 ,0]
 v3 = [0, 0 ,0]
-print 'iconf','\t', 'angle(v1,v2)','\t', 'angle(v2,v3)','\t', 'angle(v1,v3)','\t', 'volume(v1, v2, v3)','\t','ratio(v1, v2)','\t','ratio(v1,v3)','\t','ratio(v2,v3)'
+print 'iconf','\t', 'angle(v1,v2)','\t', 'angle(v2,v3)','\t', 'angle(v1,v3)','\t', 'volume(v1, v2, v3)','\t','ratio(v1, v2)','\t','ratio(v1,v3)','\t','ratio(v2,v3)','\t','nat','\t','V/nat'
 for iconf,conf in enumerate(dict_list):
     v1[0]=conf['conf']['cell'][0][0]
     v1[1]=conf['conf']['cell'][0][1]
@@ -36,4 +36,5 @@ for iconf,conf in enumerate(dict_list):
     v3[0]=conf['conf']['cell'][2][0]
     v3[1]=conf['conf']['cell'][2][1]
     v3[2]=conf['conf']['cell'][2][2]
-    print("%5d \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f" %(iconf+1, angle(v1,v2), angle(v2,v3), angle(v1,v3), volume(v1, v2, v3),ratio(v1, v2),ratio(v1,v3),ratio(v2,v3)))
+    nat=conf['conf']['nat']
+    print("%5d \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %10.3f \t %i \t %10.3f" %(iconf+1, angle(v1,v2), angle(v2,v3), angle(v1,v3), volume(v1, v2, v3),ratio(v1, v2),ratio(v1,v3),ratio(v2,v3),nat,volume(v1, v2, v3)/nat))

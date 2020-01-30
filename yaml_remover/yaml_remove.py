@@ -1,6 +1,12 @@
 #!/usr/bin/env python
 import yaml
 import argparse
+############################################
+try:
+    from yaml import CLoader as Loader
+except ImportError:
+    from yaml import Loader
+############################################
 
 str1 = "This script reads input.yaml and deletes the specific structures from input file"
 parser = argparse.ArgumentParser(description=str1)
@@ -12,11 +18,11 @@ stream = open('input.yaml','r')
 stream_2=open(args.fn_inp)
 output_stream=open(args.fn_out,"w")
 
-del_list = yaml.load(stream)
+del_list = yaml.load(stream,Loader=Loader)
 for i,d in enumerate(del_list):
     del_list[i]=int(d)-1
 
-dict_list = list(yaml.load_all(stream_2))
+dict_list = list(yaml.load_all(stream_2,Loader=Loader))
 conf_list=list(range(len(dict_list)))
 
 conf_keep_list=list(set(conf_list) - set(del_list))

@@ -34,6 +34,15 @@ for iconf,conf in enumerate(dict_list):
         if conf['conf']['coord'][i][2]>ttz_max:
             ttz_max = conf['conf']['coord'][i][2]
     #print conf[>'conf']['nat']
-    fmt="%5d"+6*"\t %10.6f"
-    print (fmt%(iconf+1,ttx_min,-ttx_max+conf['conf']['cell'][0][0],tty_min,-tty_max+conf['conf']['cell'][1][1],ttz_min,-ttz_max+conf['conf']['cell'][2][2]))
+    fmt="%5d"+3*"\t %10.6f"
+    #cell_x = (conf['conf']['cell'][0][0]**2+conf['conf']['cell'][0][1]**2+conf['conf']['cell'][0][2]**2)**0.5
+    #cell_y = (conf['conf']['cell'][1][0]**2+conf['conf']['cell'][1][1]**2+conf['conf']['cell'][1][2]**2)**0.5
+    #cell_z = (conf['conf']['cell'][2][0]**2+conf['conf']['cell'][2][1]**2+conf['conf']['cell'][2][2]**2)**0.5
+    cell_x = abs(conf['conf']['cell'][0][0])
+    cell_y = abs(conf['conf']['cell'][1][1])
+    cell_z = abs(conf['conf']['cell'][2][2])
+    conf_x = abs(ttx_min-ttx_max)
+    conf_y = abs(tty_min-tty_max)
+    conf_z = abs(ttz_min-ttz_max)
+    print (fmt%(iconf+1,cell_x/conf_x,cell_y/conf_y,cell_z/conf_z))
     #print ttx_max, tty_max, ttz_max
