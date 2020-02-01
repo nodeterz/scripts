@@ -15,27 +15,30 @@ stream_out = open(args.fn_out,'w')
 for l in dir_list:
     os.system("echo "+ l)
     flamelog=l+'/flame_log.yaml'
-    mca_in=l+'/MCA_IN'
-    gp_cmd = "grep 'FIRE converged:' " + flamelog + ' > ' + mca_in
-    sed_cmd = "sed -i 's/,/ /g' " + mca_in
-    os.system(gp_cmd)
-    os.system(sed_cmd)
-    mca = open(mca_in,'r')
-    good_pot = True
-    B = 0.0E+00
-    N = 0.0E+00
-    max_val = -1.E+00
-    for line in mca :
-        A = line.split()
-        mc_step =  int(float(A[3]))
-        B = B + mc_step
-        N = N + 1.0E+00
-        if mc_step > max_val:
-            max_val = mc_step
-            max_loc = N
-        if mc_step > args.mc_s:
-            good_pot = False
-    if good_pot:
-        average = B/N
-        #stream_out.write('\t'+'-'+'\t'+l+'\t'+str(average)+'\t\t'+str(max_val)+'\t\t'+str(max_loc)+'\n')
-        stream_out.write(" \t - %s \t %5.3f \t %5d \t %5d \n" % (l,average,max_val,max_loc))
+    if os.path.isfile(flamelog):
+        mca_in=l+'/MCA_IN'
+        gp_cmd = "grep 'FIRE converged:' " + flamelog + ' > ' + mca_in
+        sed_cmd = "sed -i 's/,/ /g' " + mca_in
+        os.system(gp_cmd)
+        os.system(sed_cmd)
+        mca = open(mca_in,'r')
+        good_pot = True
+        B = 0.0E+00
+        N = 0.0E+00
+        max_val = -1.E+00
+        for line in mca :
+            A = line.split()
+            mc_step =  int(float(A[3]))
+            B = B + mc_step
+            N = N + 1.0E+00
+            if mc_step > max_val:
+                max_val = mc_step
+                max_loc = N
+            if mc_step > args.mc_s:
+                good_pot = False
+        if good_pot:
+            average = B/N
+            #stream_out.write('\t'+'-'+'\t'+l+'\t'+str(average)+'\t\t'+str(max_val)+'\t\t'+str(max_loc)+'\n')
+            stream_out.write(" \t - %s \t %5.3f \t %5d \t %5d \n" % (l,average,max_val,max_loc))
+    else:
+        print flamelog+' not found.'

@@ -10,11 +10,13 @@ args=parser.parse_args()
 
 stream = open('input.yaml','r')
 outstream = open(args.fn_out,'w')
-head_line="#   DIR      |  rmse     |  frmse    |  qvar_Mg  |  qvar_O   | chivar_Mg | chivar_O  |  gw_Mg_1  |  gw_Mg_2  |  gw_O_1   |  gw_O_2   |  J_1_Mg   |  J_2_Mg   |  J_1_O    |  J_2_O    | chi_0_Mg  |  chi_0_O  | chi_1_Mg  | chi_1_O   |  errmax  |\n"
+head_line=("iter : %5.5d\n")%args.itr
 outstream.write(head_line)
-head_line="#    1       |    3      |    5      |      7    |    9      |     11    |    13     |     15    |     17    |    19     |    21     |    23     |    25     |    27     |    29     |     31    |     33    |    35     |    37     |    39    |\n"
+head_line="#   DIR      |  rmse     |  frmse    |  qvar_Mg  |  qvar_O   | chivar_Mg | chivar_O  |  gw_Mg_1  |  gw_Mg_2  |  gw_O_1   |  gw_O_2   |  J_1_Mg   |  J_2_Mg   |  J_1_O    |  J_2_O    | chi_0_Mg  |  chi_0_O  | chi_1_Mg  | chi_1_O   |  errmax   | eref_Mg       |  eref_O  |\n"
 outstream.write(head_line)
-head_line="#------------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|----------|\n"
+head_line="#    1       |    3      |    5      |      7    |    9      |     11    |    13     |     15    |     17    |    19     |    21     |    23     |    25     |    27     |    29     |     31    |     33    |    35     |    37     |    39     |      41       |    43    |\n"
+outstream.write(head_line)
+head_line="#------------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|-----------|---------------|----------|\n"
 outstream.write(head_line)
 dir_list=yaml.load(stream)
 for wd in dir_list:
@@ -37,6 +39,7 @@ for wd in dir_list:
     chi_1_Mg=Mg_NN['main']['chi1']
     J_1_Mg=Mg_NN['main']['hardness_1']
     J_2_Mg=Mg_NN['main']['hardness_2']
+    eref_Mg=Mg_NN['main']['ener_ref']
 
     stream4=open(wd+'/O.ann.input.yaml','r')
     O_NN = yaml.load(stream4)
@@ -46,9 +49,10 @@ for wd in dir_list:
     chi_1_O=O_NN['main']['chi1']
     J_1_O=O_NN['main']['hardness_1']
     J_2_O=O_NN['main']['hardness_2']
-    pformat="%s"+19* " \t | %6.3f"+"\t|\n"
+    eref_O=O_NN['main']['ener_ref']
+    pformat="%s"+21* " \t | %6.3f"+"\t|\n"
     #print pformat
-    outstream.write(pformat%(wd,rmse,frmse,qvar_Mg,qvar_O,chivar_Mg,chivar_O,gw_Mg_1,gw_Mg_2,gw_O_1,gw_O_2,J_1_Mg,J_2_Mg,J_1_O,J_2_O,chi_0_Mg,chi_0_O,chi_1_Mg,chi_1_O,errmax))
+    outstream.write(pformat%(wd,rmse,frmse,qvar_Mg,qvar_O,chivar_Mg,chivar_O,gw_Mg_1,gw_Mg_2,gw_O_1,gw_O_2,J_1_Mg,J_2_Mg,J_1_O,J_2_O,chi_0_Mg,chi_0_O,chi_1_Mg,chi_1_O,errmax,eref_Mg,eref_O))
     stream2.close()
 
 outstream.close()
