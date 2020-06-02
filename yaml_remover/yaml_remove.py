@@ -29,4 +29,4 @@ conf_keep_list=list(set(conf_list) - set(del_list))
 
 for conf in conf_keep_list:
     output_stream.write('---\n')
-    yaml.dump(dict_list[conf],output_stream)
+    yaml.dump(dict_list[conf],output_stream,default_flow_style=None)
