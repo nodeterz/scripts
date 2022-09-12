@@ -25,7 +25,7 @@ dict_list = list(yaml.load_all(stream, Loader=Loader))
 v1 = [0, 0 ,0]
 v2 = [0, 0 ,0]
 v3 = [0, 0 ,0]
-print 'iconf','\t', 'angle(v1,v2)','\t', 'angle(v2,v3)','\t', 'angle(v1,v3)','\t', 'volume(v1, v2, v3)','\t','ratio(v1, v2)','\t','ratio(v1,v3)','\t','ratio(v2,v3)','\t','nat','\t','V/nat'
+print('iconf','\t', 'angle(v1,v2)','\t', 'angle(v2,v3)','\t', 'angle(v1,v3)','\t', 'volume(v1, v2, v3)','\t','ratio(v1, v2)','\t','ratio(v1,v3)','\t','ratio(v2,v3)','\t','nat','\t','V/nat')
 for iconf,conf in enumerate(dict_list):
     v1[0]=conf['conf']['cell'][0][0]
     v1[1]=conf['conf']['cell'][0][1]
