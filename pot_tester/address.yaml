@@ -1,0 +1,7 @@
+runs_add:
+    - /kernph/khajeh0000/work/Zhu/TRAIN/CENT1_003
+runs:
+    - run0000
+    - run0001
+structures:
+    - /kernph/khajeh0000/work/Zhu/TRAIN/POT_TEST/data 
