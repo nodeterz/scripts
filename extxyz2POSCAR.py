@@ -1,6 +1,13 @@
 from ase.io import read, write
-from operator import itemgetter
 import numpy as np
+import argparse
+
+str1 = "This script extxyz2poscar to POSCAR"
+parser = argparse.ArgumentParser(description=str1)
+parser.add_argument('fn_inp', action='store' ,type=str, help="input extxyz")
+parser.add_argument('fn_out', action='store' ,type=str, help="output POSCAR name")
+parser.add_argument('vac', action='store' ,type=float, help="Vaccume in each side")
+args=parser.parse_args()
 
 def set_str_cell(structure=None,vac=5.0):
     rat=structure.get_positions()
@@ -30,18 +37,6 @@ def set_str_cell(structure=None,vac=5.0):
     return structure
      
 
-structures=read('all_minima_no_duplicates.extxyz',index=':')
-# Extract energies and corresponding indices
-energies_and_indices = [(structure.get_potential_energy(), i) for i, structure in enumerate(structures)]
-
-# Sort structures based on energy
-energies_and_indices.sort(key=itemgetter(0))
-
-# Create a list of sorted structures
-sorted_structures = [structures[i] for _, i in energies_and_indices]
-
-indList = np.linspace(0, len(sorted_structures)-1, num=50, endpoint=True,dtype=int)
-for iidx, idx in enumerate(indList):
-    selStr=set_str_cell(sorted_structures[idx])
-    sorted_structures[idx].write('posoutSelected.extxyz',format='extxyz',append=True)
-    selStr.write('POSCAR%05d'%iidx, format='vasp')
+structure=read(args.fn_inp)
+selStr=set_str_cell(structure,vac=args.vac)
+selStr.write(args.fn_out, format='vasp')
