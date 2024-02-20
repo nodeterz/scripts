@@ -1,13 +1,12 @@
 from ase.io import read, write
 import numpy as np
+import argparse
+str1 = "This script converts extxyz to xyz "
+parser = argparse.ArgumentParser(description=str1)
+parser.add_argument('fn_inp', action='store' ,type=str, help="input structure")
+args=parser.parse_args()
 
-strs=read('posoutSelected.extxyz',index=':')
+strs=read(args.fn_inp,index=':')
 
-for istr,struct in enumerate(strs):
-    outStream=open('posinp_%05d.xyz'%istr,'w')
-    pos=struct.get_positions()
-    elems=struct.get_chemical_symbols()
-    outStream.write('%d angstroem\nfree'%struct)
-    for i in range(len(elems)):
-        outStream.write('%2s %.8f %.8f %.8f\n'%(elems[i],pos[i][0],pos[i][1],pos[i][2]))
-    outStream.close()
+for istr, struct in enumerate(strs):
+    struct.write('posout_%05d.xyz'%istr,format='xyz',append=False)
