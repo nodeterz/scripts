@@ -1,0 +1,37 @@
+Switching to atp/3.14.5.
+Switching to cray-libsci/20.09.1.
+Switching to craype/2.7.10.
+Switching to gcc/9.3.0.
+Switching to perftools-base/21.09.0.
+Switching to pmi/5.0.17.
+/users/erahmati/.local/lib/python3.9/site-packages/nequip/utils/_global_options.py:48: UserWarning: Setting the GLOBAL value for allow_tf32 to False which is different than the previous value of True
+  warnings.warn(
+/users/erahmati/.local/lib/python3.9/site-packages/nequip/utils/_global_options.py:57: UserWarning: We currently recommend the use of PyTorch 1.11
+  warnings.warn("We currently recommend the use of PyTorch 1.11")
+/users/erahmati/.local/lib/python3.9/site-packages/nequip/utils/_global_options.py:81: UserWarning: Setting the GLOBAL value for jit bailout depth to `2` which is different than the previous value of `20`
+  warnings.warn(
+/users/erahmati/.local/lib/python3.9/site-packages/ase/io/extxyz.py:1000: UserWarning: write_xyz() overwriting array "forces" present in atoms.arrays with stored results from calculator
+  warnings.warn('write_xyz() overwriting array "{0}" present '
+
+
+Batch Job Summary Report (version 21.01.1) for Job "Compass" (53705084) on daint
+
+Job information (1/3)
+-----------------------------------------------------------------------------------------------------
+             Submit            Eligible               Start                 End    Elapsed Time limit
+------------------- ------------------- ------------------- ------------------- ---------- ----------
+2024-05-30T15:24:26 2024-05-30T15:24:26 2024-05-30T15:38:54 2024-05-30T15:44:10   00:05:16   23:50:00
+-----------------------------------------------------------------------------------------------------
+
+Job information (2/3)
+-------------------------------------------------------------
+    Username      Account    Partition   NNodes        Energy
+------------ ------------ ------------ -------- -------------
+    erahmati        s1167       normal        1     32.225 kJ
+
+Job information (3/3) - GPU utilization data
+----------------------------------------------------
+   Node name       Usage      Max mem Execution time
+------------ ----------- ------------ --------------
+    nid04219        31 %     1299 MiB       00:01:57
+

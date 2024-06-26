@@ -1,0 +1,39 @@
+/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/nequip/utils/_global_options.py:59: UserWarning: !! Upstream issues in PyTorch versions >1.11 have been seen to cause unusual performance degredations on some CUDA systems that become worse over time; see https://github.com/mir-group/nequip/discussions/311. At present we *strongly* recommend the use of PyTorch 1.11 if using CUDA devices; while using other versions if you observe this problem, an unexpected lack of this problem, or other strange behavior, please post in the linked GitHub issue.
+  warnings.warn(
+/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/nequip/utils/_global_options.py:70: UserWarning: Setting the GLOBAL value for jit fusion strategy to `[('DYNAMIC', 3)]` which is different than the previous value of `[('STATIC', 2), ('DYNAMIC', 10)]`
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/ehsan/Works/Stefan/Biased_calculations/Au_Biased_MH/COMPASS/FC_IH/Success/2MdStep_UnSuccess_S3_2MdStep_MDW0005_GW0005_Fc_Ih_147_fpd_001/Barrier_plotter.py", line 30, in <module>
+    EAL=ALStr.get_potential_energy()
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/ase/atoms.py", line 731, in get_potential_energy
+    energy = self._calc.get_potential_energy(self)
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/ase/calculators/calculator.py", line 709, in get_potential_energy
+    energy = self.get_property('energy', atoms)
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/ase/calculators/calculator.py", line 737, in get_property
+    self.calculate(atoms, [name], system_changes)
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/nequip/ase/nequip_calculator.py", line 118, in calculate
+    out = self.model(data)
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1532, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ehsan/PythonVenvs/PyTorch/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1541, in _call_impl
+    return forward_call(*args, **kwargs)
+RuntimeError: The following operation failed in the TorchScript interpreter.
+Traceback of TorchScript, serialized code (most recent call last):
+  File "code/__torch__/nequip/data/AtomicDataDict.py", line 35, in forward
+      else:
+        _11 = [edge_cell_shift, torch.squeeze(cell, 0)]
+        edge_vec3 = torch.add(edge_vec, torch.einsum("ni,ij->nj", _11))
+                                        ~~~~~~~~~~~~ <--- HERE
+        edge_vec1 = edge_vec3
+      edge_vec0 = edge_vec1
+
+Traceback of TorchScript, original code (most recent call last):
+  File "/users/erahmati/.local/lib/python3.9/site-packages/nequip/data/AtomicDataDict.py", line 90, in forward
+                # Note that we do NOT check that the batch array, if it is present,
+                # is trivial — but this does need to be consistent.
+                edge_vec = edge_vec + torch.einsum(
+                                      ~~~~~~~~~~~~ <--- HERE
+                    "ni,ij->nj",
+                    edge_cell_shift,
+RuntimeError: CUDA error: CUBLAS_STATUS_ALLOC_FAILED when calling `cublasCreate(handle)`
+

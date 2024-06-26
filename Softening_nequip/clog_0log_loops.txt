@@ -1,0 +1,2 @@
+iloop	isegment	barrier	e1	e	e2	distance	parent
+  0	  0	s	 -413.339172	 -412.044679	 -415.771118	 13.030584	  0

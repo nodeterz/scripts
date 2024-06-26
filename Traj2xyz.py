@@ -1,19 +1,16 @@
-#from ase.calcul ators.eam import EAM
-#rom ase.cluster.wulff import wulff_construction
-#from ase.cluster.icosahedron import Icosahedron
-from ase.io import read
-from ase.md.andersen import Andersen
-from ase.md import MDLogger
-from ase.io import write, Trajectory
-from ase.units import fs
+import sys
+from ase.io import read, write, Trajectory
 
-def write_vsim():
-    structs = Trajectory('md_0000000.traj')
+def write_vsim(filename,filename2):
+    structs = Trajectory(filename)
     Traj_len=len(structs)
     for i in range(Traj_len):
-        structs[i].write('InputStr%07d.xyz'%i,format='xyz',append=False)    
+        if i==0:
+            structs[i].write(filename2,format='extxyz',append=False)    
+        else:
+            structs[i].write(filename2,format='extxyz',append=True)    
 
 
 if __name__ == '__main__':
-    write_vsim()
+    write_vsim(sys.argv[1],sys.argv[2])
     quit()
